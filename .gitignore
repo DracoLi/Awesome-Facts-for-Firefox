@@ -2,4 +2,4 @@
 *.xpi
 
 # Mac
-.DS_STORE
+*/*/.DS_STORE
