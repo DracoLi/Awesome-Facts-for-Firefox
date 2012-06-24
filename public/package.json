@@ -1,0 +1,11 @@
+{
+  "name": "draco-awesome-facts",
+  "fullName": "Awesome Facts",
+  "description": "Get an interesting fact delivered to you on every page you visit!",
+  "icon": "data/images/icon-48.png",
+  "author": "Draco Li",
+  "license": "MPL 2.0",
+  "keywords": ["facts"],
+  "id": "dracken-solutions-awesome-facts",
+  "version": "1.22"
+}

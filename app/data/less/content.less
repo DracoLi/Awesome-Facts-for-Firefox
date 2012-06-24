@@ -1,0 +1,214 @@
+.draco-interesting-default {
+  height: auto;
+  width: auto;
+  background: none;
+  display: inherit;
+  opacity: 1.0;
+  border: none;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  text-decoration: none;
+  color: #000;
+  box-shadow: none;
+  clear: none;
+}
+
+#draco-interesting-facts-tooltip {
+  .draco-interesting-default;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  &.tooltip {
+    position: absolute;
+    z-index: 1020;
+    display: block;
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: visible;
+  }
+
+  &.tooltip.in {
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+  }
+
+  &.tooltip.top {
+    margin-top: -2px;
+  }
+
+  &.tooltip.right {
+    margin-left: 2px;
+  }
+
+  &.tooltip.bottom {
+    margin-top: 2px;
+  }
+
+  &.tooltip.left {
+    margin-left: -2px;
+  }
+
+  &.tooltip.top .tooltip-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-top: 5px solid #000000;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+  }
+
+  &.tooltip.left .tooltip-arrow {
+    top: 50%;
+    right: 0;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #000000;
+  }
+
+  &.tooltip.bottom .tooltip-arrow {
+    top: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #000000;
+    border-left: 5px solid transparent;
+  }
+
+  &.tooltip.right .tooltip-arrow {
+    top: 50%;
+    left: 0;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-right: 5px solid #000000;
+    border-bottom: 5px solid transparent;
+  }
+
+  .tooltip-inner {
+    .draco-interesting-default;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    max-width: 200px;
+    padding: 3px 8px;
+    margin: 0;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    background-color: #000000;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+  }
+
+  .tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  
+  &.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+       -moz-transition: opacity 0.15s linear;
+        -ms-transition: opacity 0.15s linear;
+         -o-transition: opacity 0.15s linear;
+            transition: opacity 0.15s linear;
+  }
+}
+
+#draco-interesting-facts123 {
+  .draco-interesting-default;
+  width: 100%;
+  background: #DDD;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+  
+  tbody {
+    .draco-interesting-default;
+    vertical-align: middle;
+    width: 100%;
+    display: table;
+    border-spacing: 2px;
+  }
+
+  tr {
+    .draco-interesting-default;
+    vertical-align: middle;
+    width: 100%;
+    display: table;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  #draco-interesting-facts-share {
+    .draco-interesting-default;
+    opacity: 0.55;
+    width: 20px;
+    display: table-cell;
+    line-height: 0px;
+    
+    &:hover { 
+      opacity: 0.2;
+      filter: alpha(opacity=20);
+    }
+    
+    &.disabled:hover { 
+      opacity: 0.55;
+      filter: alpha(opacity=55);
+    }
+    
+    iframe {
+      border: none;
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+      width: 18px;
+      height: 18px;
+      overflow: hidden;
+    }
+  }
+  
+  #draco-interesting-facts-fact123 {
+    .draco-interesting-default;
+    text-align: center;
+    color: #1B0606;
+    width: auto;
+    line-height: 20px;
+    font-size: 16px;
+    display: table-cell;
+    overflow: hidden;
+  }
+  
+  #draco-interesting-facts-close123 {
+    .draco-interesting-default;
+    font-family: sans-serif;
+    font-size: 20px;
+    line-height: 17px;
+    vertical-align: top;
+    opacity: 0.7;
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+    display: table-cell;
+    overflow: hidden;
+    
+    &:hover { 
+      opacity: 0.4;
+      filter: alpha(opacity=40);
+    }
+  }
+  
+  #draco-intereseting-facts-clear123 {
+    .draco-interesting-default;
+    clear: both;
+    margin: 0;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+}

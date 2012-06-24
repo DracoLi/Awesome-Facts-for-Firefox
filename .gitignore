@@ -1,0 +1,5 @@
+# firefox
+*.xpi
+
+# Mac
+.DS_STORE
