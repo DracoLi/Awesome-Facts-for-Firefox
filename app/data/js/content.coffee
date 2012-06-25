@@ -20,6 +20,7 @@ self.on 'message', (msg) ->
 
 is_site_disabled = ->
   ignoredTags = [
+    'navbar.navbar-fixed-top'
     '#blueBar.fixed_elem'
     '#onegoogbar'
     '#gb'
