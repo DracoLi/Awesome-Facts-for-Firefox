@@ -41,32 +41,31 @@
 
     FactsManager.prototype.factPages = [];
 
+    FactsManager.prototype.storage = simpleStorage.storage;
+
+    FactsManager.prototype.factsUrl = 'http://simple-planet-5852.herokuapp.com/facts?format=json&count=80';
+
     FactsManager.prototype.isEnabled = true;
 
     FactsManager.prototype.facts = [];
 
-    FactsManager.prototype.readFacts = [];
-
-    FactsManager.prototype.storage = simpleStorage.storage;
-
-    FactsManager.prototype.factsUrl = "http://simple-planet-5852.herokuapp.com/facts?format=json&count=80";
+    FactsManager.prototype.readFacts = {
+      'count': 0
+    };
 
     _instance = null;
 
     FactsManager.instance = function() {
-      if (!(this._instance != null)) {
-        _instance = new this;
-      }
-      return _instance;
+      return _instance != null ? _instance : _instance = new this;
     };
 
     function FactsManager() {
       if (!this.storage.pluginEnabled) {
-        this.updateEnabled(true);
+        this.updateEnabled(this.isEnabled);
       }
       this.isEnabled = this.storage.pluginEnabled;
-      this.facts = this.storage.facts || [];
-      this.readFacts = this.storage.readFacts || [];
+      this.facts = this.storage.facts || this.facts;
+      this.readFacts = this.storage.readFacts || this.readFacts;
       this.fetchFactsIfRequired();
     }
 
@@ -113,7 +112,7 @@
       if (callback == null) {
         callback = null;
       }
-      console.log('fetching facts');
+      DLog('fetching facts');
       return Request({
         url: this.factsUrl,
         onComplete: function(response) {
@@ -133,7 +132,7 @@
       this.storage.pluginEnabled = value;
       this.isEnabled = value;
       if (value === 'true') {
-        return console.log('true that');
+        return DLog('true that');
       }
     };
 
@@ -156,8 +155,9 @@
     FactsManager.prototype.isReadFact = function(fact) {
       if (this.readFacts[fact.id] != null) {
         return true;
+      } else {
+        return false;
       }
-      return false;
     };
 
     FactsManager.prototype.clearReadFactsIfRequired = function() {

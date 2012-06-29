@@ -23,30 +23,27 @@ class FactsManager
   
   factPages: []
   
-  isEnabled: true
-  
-  facts: []
-  
-  readFacts: []
-  
   storage: simpleStorage.storage
   
-  factsUrl: "http://simple-planet-5852.herokuapp.com/facts?format=json&count=80"
+  factsUrl: 'http://simple-planet-5852.herokuapp.com/facts?format=json&count=80'
+  
+  # Defaults
+  isEnabled: true
+  facts: []
+  readFacts: { 'count': 0 }
   
   _instance = null
   @instance: ->
-    if not @._instance?
-      _instance = new @
-    _instance 
+    _instance ?= new @
       
   constructor: ->
-    # Set plugin enabled
-    @updateEnabled(true) if !@storage.pluginEnabled
+    # Set plugin default state
+    @updateEnabled(@isEnabled) if !@storage.pluginEnabled
     @isEnabled = @storage.pluginEnabled
     
     # Set facts and read facts
-    @facts = @storage.facts || []
-    @readFacts = @storage.readFacts || []
+    @facts = @storage.facts || @facts
+    @readFacts = @storage.readFacts || @readFacts
     
     # Load facts if required
     @fetchFactsIfRequired()
@@ -65,6 +62,8 @@ class FactsManager
 
   getFact: ->
     @fetchFactsIfRequired()
+    
+    # Get facts until its not in our read facts
     targetFact = @facts.splice(0, 1)[0]
     while @isReadFact(targetFact)
       targetFact = @facts.splice(0, 1)[0]
@@ -75,7 +74,7 @@ class FactsManager
     targetFact
   
   fetchFacts: (callback = null) ->
-    console.log 'fetching facts'
+    DLog 'fetching facts'
     Request
       url: @factsUrl
       onComplete: (response) =>
@@ -89,7 +88,7 @@ class FactsManager
   updateEnabled: (value) ->
     @storage.pluginEnabled = value
     @isEnabled = value
-    console.log 'true that' if value == 'true'
+    DLog 'true that' if value == 'true'
   
   saveFacts: ->
     @storage.facts = @facts
@@ -104,9 +103,7 @@ class FactsManager
       data.url('images/plugin-off.png')  
   
   isReadFact: (fact) ->
-    if @readFacts[fact.id]?
-      return true
-    return false
+    if @readFacts[fact.id]? then true else false
     
   clearReadFactsIfRequired: ->
     if @readFacts["count"] > @MAX_STORED
