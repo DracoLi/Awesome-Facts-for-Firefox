@@ -1,5 +1,4 @@
 if window.frameElement != null
-  console.log 'Is Iframe'
   return
 
 # Check if plugin is enabled
@@ -14,13 +13,13 @@ self.on 'message', (msg) ->
   else if msg.fact?
     factMananger.showFact msg.fact
   else if msg.css?
-    script = $('<style type="text/css"></style>')
-    script.html msg.css
+    script = $('<style>', { type: 'text/css' })
+    script.text msg.css
     $(script).appendTo $('head:first')
 
 is_site_disabled = ->
   ignoredTags = [
-    'navbar.navbar-fixed-top'
+    '.navbar.navbar-fixed-top'
     '#blueBar.fixed_elem'
     '#onegoogbar'
     '#gb'
@@ -39,25 +38,13 @@ factMananger =
     $('#draco-interesting-facts123').length > 0
   
   createNewFact: (fact) ->
-    $factsBar = $('''
-      <table id="draco-interesting-facts123">
-      <tbody>
-        <tr>
-          <td id="draco-interesting-facts-share">
-            <iframe src=""></iframe>
-          </td>
-          <td id="draco-interesting-facts-fact123">
-          </td>
-          <td id="draco-interesting-facts-close123">
-            &times;
-          </td>
-        </tr>
-      </tbody>
-      </table>
-      '''
-    )
-    
-    console.log $factsBar
+    $factsBar = $('<table>', { id: 'draco-interesting-facts123' })
+      .append('<tbody>').append('<tr>')
+    $('<td>', { id: 'draco-interesting-facts-share' }).appendTo $factsBar.find('tr')
+    $('<iframe>').appendTo $factsBar.find('#draco-interesting-facts-share')
+    $('<td>', { id: 'draco-interesting-facts-fact123' }).appendTo $factsBar.find('tr')
+    $('<td>', { id: 'draco-interesting-facts-close123' }).appendTo $factsBar.find('tr')
+    $factsBar.find('#draco-interesting-facts-close123').text('×')
 
     # give content and share url to facts bar
     $factsBar.find('#draco-interesting-facts-fact123')

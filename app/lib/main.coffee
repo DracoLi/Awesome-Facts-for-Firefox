@@ -179,10 +179,11 @@ exports.main = ->
           isEnabled: fM.isEnabled
       
       # Load the css files
-      worker.postMessage 
-        css: data.load('css/jquery.noty.css') + \
-             data.load('css/noty_theme_facebook.css') + \
-             data.load('css/content.css')
+      if worker?
+        worker.postMessage 
+          css: data.load('css/jquery.noty.css') + \
+               data.load('css/noty_theme_facebook.css') + \
+               data.load('css/content.css')
       
   simpleStorage.on 'OverQuota', ->
     notifications.notify

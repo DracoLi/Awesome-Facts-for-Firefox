@@ -238,9 +238,11 @@
             isEnabled: fM.isEnabled
           });
         });
-        return worker.postMessage({
-          css: data.load('css/jquery.noty.css') + data.load('css/noty_theme_facebook.css') + data.load('css/content.css')
-        });
+        if (worker != null) {
+          return worker.postMessage({
+            css: data.load('css/jquery.noty.css') + data.load('css/noty_theme_facebook.css') + data.load('css/content.css')
+          });
+        }
       }
     });
     simpleStorage.on('OverQuota', function() {

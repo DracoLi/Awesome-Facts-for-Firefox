@@ -3,7 +3,6 @@
   var factMananger, is_site_disabled;
 
   if (window.frameElement !== null) {
-    console.log('Is Iframe');
     return;
   }
 
@@ -20,15 +19,17 @@
     } else if (msg.fact != null) {
       return factMananger.showFact(msg.fact);
     } else if (msg.css != null) {
-      script = $('<style type="text/css"></style>');
-      script.html(msg.css);
+      script = $('<style>', {
+        type: 'text/css'
+      });
+      script.text(msg.css);
       return $(script).appendTo($('head:first'));
     }
   });
 
   is_site_disabled = function() {
     var ignoredTags, selectors;
-    ignoredTags = ['navbar.navbar-fixed-top', '#blueBar.fixed_elem', '#onegoogbar', '#gb', '#mngb', '.topbar .global-nav', '#navBar.fixed'];
+    ignoredTags = ['.navbar.navbar-fixed-top', '#blueBar.fixed_elem', '#onegoogbar', '#gb', '#mngb', '.topbar .global-nav', '#navBar.fixed'];
     selectors = ignoredTags.join(', ');
     if ($(selectors).length > 0) {
       return true;
@@ -44,8 +45,20 @@
     },
     createNewFact: function(fact) {
       var $factsBar;
-      $factsBar = $('<table id="draco-interesting-facts123">\n<tbody>\n  <tr>\n    <td id="draco-interesting-facts-share">\n      <iframe src=""></iframe>\n    </td>\n    <td id="draco-interesting-facts-fact123">\n    </td>\n    <td id="draco-interesting-facts-close123">\n      &times;\n    </td>\n  </tr>\n</tbody>\n</table>');
-      console.log($factsBar);
+      $factsBar = $('<table>', {
+        id: 'draco-interesting-facts123'
+      }).append('<tbody>').append('<tr>');
+      $('<td>', {
+        id: 'draco-interesting-facts-share'
+      }).appendTo($factsBar.find('tr'));
+      $('<iframe>').appendTo($factsBar.find('#draco-interesting-facts-share'));
+      $('<td>', {
+        id: 'draco-interesting-facts-fact123'
+      }).appendTo($factsBar.find('tr'));
+      $('<td>', {
+        id: 'draco-interesting-facts-close123'
+      }).appendTo($factsBar.find('tr'));
+      $factsBar.find('#draco-interesting-facts-close123').text('×');
       $factsBar.find('#draco-interesting-facts-fact123').html(fact.content);
       $factsBar.find('#draco-interesting-facts-share iframe').attr("src", "" + this.shareURL + "/" + fact.id);
       window.addEventListener('message', this.handleShareMessage, false);
